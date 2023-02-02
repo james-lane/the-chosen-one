@@ -1,39 +1,65 @@
 import React, { useState, useEffect } from 'react';
-import Confetti from 'react-confetti'
-import { VictimList } from './VictimList.tsx';
+import Confetti from 'react-confetti';
+import { ChosenOneList } from './ChosenOneList.tsx';
 import './App.css';
 
 function App() {
-  const [potentialVictims, setPotentialVictims] = useState(localStorage.getItem('victims') ? JSON.parse(localStorage.getItem('victims')) : [])
-  const [currentVictim, setCurrentVictim] = useState()
+  const [potentialChosenOnes, setPotentialChosenOnes] = useState(
+    localStorage.getItem('chosenOnes')
+      ? JSON.parse(localStorage.getItem('chosenOnes'))
+      : []
+  );
+  const [currentChosenOne, setCurrentChosenOne] = useState();
 
-  const [runConfetti, setRunConfetti] = useState(false)
+  const [runConfetti, setRunConfetti] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('victims', JSON.stringify(potentialVictims));
-    setCurrentVictim(potentialVictims.length > 0 ? 'Ready?' : 'Add victims')
-},[potentialVictims])
+    localStorage.setItem('chosenOnes', JSON.stringify(potentialChosenOnes));
+    setCurrentChosenOne(
+      potentialChosenOnes.length > 0 ? 'Ready?' : 'Nothing to choose'
+    );
+  }, [potentialChosenOnes]);
 
-  const findVictim = () => {
-    runConfetti && setRunConfetti(false)
+  const findChosenOne = () => {
+    runConfetti && setRunConfetti(false);
     const loop = setInterval(() => {
-      setCurrentVictim(potentialVictims[Math.floor(Math.random() * potentialVictims.length)])
+      setCurrentChosenOne(
+        potentialChosenOnes[
+          Math.floor(Math.random() * potentialChosenOnes.length)
+        ]
+      );
     }, 50);
-    setTimeout(() => [clearInterval(loop), setRunConfetti(true)], 2000)
-    setCurrentVictim(potentialVictims[Math.floor(Math.random() * potentialVictims.length)])
-  }
+    setTimeout(() => [clearInterval(loop), setRunConfetti(true)], 2000);
+    setCurrentChosenOne(
+      potentialChosenOnes[
+        Math.floor(Math.random() * potentialChosenOnes.length)
+      ]
+    );
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <header className="App-header"></header>
       <main>
-      {runConfetti && <Confetti recycle={false} run={runConfetti} onConfettiComplete={() => setRunConfetti(false)} />}
-        <p className="victim">{currentVictim}</p>
-        {potentialVictims.length > 0 && <button className="findVictimButton" onClick={findVictim}>Find victim</button>}
+        {runConfetti && (
+          <Confetti
+            recycle={false}
+            run={runConfetti}
+            onConfettiComplete={() => setRunConfetti(false)}
+          />
+        )}
+        <p className="chosenOne">{currentChosenOne}</p>
+        {potentialChosenOnes.length > 0 && (
+          <button className="findChosenOneButton" onClick={findChosenOne}>
+            Find the chosen one
+          </button>
+        )}
       </main>
       <aside>
-        <VictimList names={potentialVictims} setVictims={setPotentialVictims} />
+        <ChosenOneList
+          names={potentialChosenOnes}
+          setChosenOnes={setPotentialChosenOnes}
+        />
       </aside>
     </div>
   );

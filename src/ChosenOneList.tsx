@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export const VictimList = ({
+export const ChosenOneList = ({
   names,
-  setVictims,
+  setChosenOnes,
 }: {
   names: string[];
-  setVictims: Function;
+  setChosenOnes: Function;
 }) => {
   const [currentInput, setCurrentInput] = useState('');
 
@@ -14,18 +14,18 @@ export const VictimList = ({
   };
 
   const addName = () => {
-    setVictims([...names, currentInput]);
+    setChosenOnes([...names, currentInput]);
     setCurrentInput('');
   };
 
   const removeName = (target: any) => {
-    setVictims(
+    setChosenOnes(
       names.filter((value) => value !== target.previousSibling.textContent)
     );
   };
 
   return (
-    <div className="victimListContainer">
+    <div className="chosenOneListContainer">
       <form className="inputContainer" action="#">
         <input
           autoFocus
@@ -34,7 +34,7 @@ export const VictimList = ({
         ></input>
         <button onClick={addName}>Add</button>
       </form>
-      <ul className="victimList">
+      <ul className="chosenOneList">
         {names.map((name) => (
           <li key={name}>
             {name}

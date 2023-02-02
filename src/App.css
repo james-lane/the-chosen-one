@@ -34,14 +34,14 @@ main {
   grid-column: 1;
 }
 
-.victim {
+.chosenOne {
   font-size: 8rem;
   font-weight: bold;
   text-transform: uppercase;
   margin: 2rem;
 }
 
-.findVictimButton {
+.findChosenOneButton {
   -webkit-appearance: none;
   background: purple;
   color: white;
@@ -52,7 +52,7 @@ main {
   border-radius: 0.5rem;
 }
 
-.victimListContainer {
+.chosenOneListContainer {
   padding: 20px;
   box-sizing: border-box;
   background: #1e2229;
@@ -84,12 +84,12 @@ main {
   min-width: 80px;
 }
 
-.victimList {
+.chosenOneList {
   list-style: none;
   padding: 0;
 }
 
-.victimList li {
+.chosenOneList li {
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -97,11 +97,11 @@ main {
   align-items: center;
 }
 
-.victimList li:not(:last-child) {
+.chosenOneList li:not(:last-child) {
   border-bottom: 1px solid #404652;
 }
 
-.victimList button {
+.chosenOneList button {
   -webkit-appearance: none;
   border: none;
   background: transparent;
